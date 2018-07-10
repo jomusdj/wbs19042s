@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+<script src="jquery/jquery-1.11.2.min.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<style>
+</style>
+<body style="margin: 20px;">
+	<div class="progress">
+		<div id="pgs" class="progress-bar progress-bar-striped active" style="width: 0%;">
+		    <span id="percent">0 %</span>
+		</div>
+	</div>	
+</body>
+<script>
+	var handle = setInterval(function() {
+		var percent = parseInt($("#percent").text());
+		percent ++;
+		$("#pgs").css("width", percent + "%");
+		$("#percent").text(percent + " %");
+		
+		if (percent == 100) {
+			$("#pgs").removeClass("active");
+			$("#pgs").removeClass("progress-bar-striped");
+			clearInterval(handle);
+		} else if (percent >= 0 && percent < 30) {
+			$("#pgs").addClass("progress-bar-danger");
+		} else if (percent >= 30 && percent < 60) {
+			$("#pgs").removeClass("progress-bar-danger");
+			$("#pgs").addClass("progress-bar-warning");
+		} else if (percent >= 60 && percent < 90) {
+			$("#pgs").removeClass("progress-bar-warning");
+			$("#pgs").addClass("progress-bar-info");
+		} else if (percent >= 90) {
+			$("#pgs").removeClass("progress-bar-info");
+			$("#pgs").addClass("progress-bar-success");
+		}
+	}, 100);
+</script>
